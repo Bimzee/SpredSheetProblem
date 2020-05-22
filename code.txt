@@ -1,0 +1,77 @@
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Collections;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
+using System.Text;
+using System;
+
+
+
+class Result
+{
+
+    /*
+     * Complete the 'getSpreadsheetNotation' function below.
+     *
+     * The function is expected to return a STRING.
+     * The function accepts LONG_INTEGER n as parameter.
+     */
+
+    public static string getSpreadsheetNotation(long n)
+    {
+        
+        //Rows 1 - 10^9
+        //Columns : A - ZZ (702)
+        string result = "";
+        if(n/26<1){
+            int val = ((int)'A')-1;
+            
+            result = ((char)val).ToString();
+            return Convert.ToString(result);
+        }
+        else{
+            /*
+            if(n%26 ==0){
+                return getSpreadsheetNotation((n/26)-1 + (long)getSpreadsheetNotation(26));
+            }
+            return getSpreadsheetNotation(n/26) + (long)getSpreadsheetNotation(n%26);
+            */
+            
+            int val = ((int)'A')-1;
+            var q=n;
+            long x = 0;
+            char temp;
+            while(q>0){
+                x= (q%26) + val;
+                q=(int)(q/26);
+                temp = (char)x;
+                result =  temp + result;
+                //Convert.ToString(x +val);//+result.ToString();
+                
+            }
+            return (q+1).ToString() + result;
+
+            /*var loopCnt = n%26;
+            var colCnt = n/702
+            
+            for(int i=0;i<loopCnt;i++){
+                val++
+                if(n/702<1){
+                    var num = n%26;
+                    return ""
+                }
+            }*/
+            
+        }
+    }
+
+}
+
+class Solution
